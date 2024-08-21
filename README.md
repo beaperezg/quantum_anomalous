@@ -1,4 +1,6 @@
 # Quantum anomalous Floquet phases
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13353499.svg)](https://doi.org/10.5281/zenodo.13353499)
  
 This code belongs to the manuscript "Quantum origin of anomalous Floquet phases in cavity-QED materials" [(arXiv:2312.10141)](https://arxiv.org/abs/2312.10141). 
 It contains all the necessary simulations to reproduce the figures within the article. 
