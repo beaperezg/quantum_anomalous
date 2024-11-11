@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Optional
-
+import qutip as qt
 
 def probability(Ncells: int, nmax: int, slist: np.ndarray, v: np.ndarray) -> np.ndarray:
     sumat = np.zeros((np.size(slist), 2 * Ncells * (nmax + 1)))
@@ -53,3 +53,18 @@ def calculate_phase(avec: np.ndarray, nphases: Optional[int] = None, window: Opt
     phases[cond1 & cond2] = -np.pi
 
     return phases
+
+
+def entanglement_entropy(index, avec, nmax, Ncells, Omegavals):
+    
+    ent_phot = []
+    ent_fer = []
+        
+    for i in range(np.size(Omegavals)):
+        rho_phot = qt.Qobj(avec[i][:, index], dims=[[nmax + 1, 2 * Ncells], [1, 1]]).ptrace(0)
+        ent_phot.append(qt.entropy_vn(rho_phot))
+        
+        rho_fer = qt.Qobj(avec[i][:, index], dims=[[nmax + 1, 2 * Ncells], [1, 1]]).ptrace(1)
+        ent_fer.append(qt.entropy_vn(rho_fer))
+
+    return np.array(ent_phot), np.array(ent_fer)
